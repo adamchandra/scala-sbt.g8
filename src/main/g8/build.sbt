@@ -58,7 +58,7 @@ lazy val standardSettings = Seq(
   scalacOptions in (Compile,doc) ++= Seq("-groups", "-implicits"),
   scalacOptions in (Test, console) --= Seq("-Yno-imports", "-Ywarn-unused-import"),
 
-  wartremoverErrors in (Compile, compile) ++= warts, // Warts.all,
+  // wartremoverErrors in (Compile, compile) ++= warts, // Warts.all,
 
   console <<= console in Test, // console alias test:console
 
@@ -67,10 +67,12 @@ lazy val standardSettings = Seq(
     "com.lihaoyi"                %% "acyclic" % "0.1.4" % "provided",
     "com.lihaoyi"                %% "ammonite-ops" % "0.7.7",
     "com.typesafe.play"          %% "play-json" % "2.5.8",
-    "com.github.scopt"           %% "scopt" % "3.5.0"
+    "com.github.scopt"           %% "scopt" % "3.5.0",
     "com.github.julien-truffaut" %%% "monocle-core" % monocleVersion % "compile, test",
     "org.scalaz"                 %%% "scalaz-core"  % scalazVersion  % "compile, test",
-    "com.github.mpilquist"       %%% "simulacrum"   % "0.7.0"        % "compile, test"),
+    "com.github.mpilquist"       %%% "simulacrum"   % "0.7.0"        % "compile, test"
+  )
+)
 
 
 lazy val root = Project("root", file("."))
@@ -83,10 +85,9 @@ lazy val root = Project("root", file("."))
   .aggregate(coreJVM, coreJS)
 
 lazy val core = crossProject.in(file("core"))
-  .settings(standardSettings ++ publishSettings: _*)
+  .settings(standardSettings)
   .settings(name := "core")
   .jvmSettings(testDependencies)
-  .enablePlugins(AutomateHeaderPlugin)
 
 lazy val coreJVM = core.jvm
 lazy val coreJS = core.js
