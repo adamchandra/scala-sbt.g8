@@ -76,7 +76,7 @@ lazy val standardSettings = Seq(
 
 
 lazy val root = Project("root", file("."))
-  .settings(standardSettings)
+  .settings(standardSettings:_*)
   .settings(Seq(
     publish := (),
     publishLocal := (),
@@ -84,9 +84,13 @@ lazy val root = Project("root", file("."))
   .settings(name := "root")
   .aggregate(coreJVM, coreJS)
 
-lazy val core = crossProject.in(file("core"))
+lazy val module = project.in(file("scala-module"))
   .settings(standardSettings)
-  .settings(name := "core")
+  .settings(name := "scala-module")
+
+lazy val core = crossProject.in(file("scalajs-module"))
+  .settings(standardSettings)
+  .settings(name := "scalajs-module")
   .jvmSettings(testDependencies)
 
 lazy val coreJVM = core.jvm
