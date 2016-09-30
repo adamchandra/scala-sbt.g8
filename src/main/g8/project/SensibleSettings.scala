@@ -24,7 +24,7 @@ object Sensible {
     addCompilerPlugin("com.lihaoyi" %% "acyclic" % "0.1.4"),
     ivyLoggingLevel := UpdateLogging.Quiet,
 
-    todosTags := Set("FIXME", "TODO", "WIP", "XXX", "\\?\\?\\?"),
+    todosTags := Set("FIXME", "TODO", "WIP", "XXX"),
 
     scalacOptions in Compile ++= Seq(
       "-encoding", "UTF-8",
